@@ -57,6 +57,7 @@ public class LinkedList {
             currentNode = this.headNode;
             if (currentNode.getPointer() == null){
                 this.headNode = null;
+                return this.getHead();
             }
             else{
                 nextNode = currentNode.getPointer();
