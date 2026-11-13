@@ -32,10 +32,12 @@ public class LinkedList {
         }
         else {
             // traverse through list until a null pointer is found
-            currentNode = this.headNode.getPointer();
-            while (!(currentNode.getPointer() == null)){
+            currentNode = this.headNode;
+            nextNode = currentNode.getPointer();
+            while (!(nextNode == null)){
                 // traverse through list until end of list found
-                currentNode = currentNode.getPointer();
+                currentNode = nextNode;
+                nextNode = currentNode.getPointer();
             }
             // newNode added at end of list
             currentNode.setPointer(newNode);
@@ -76,7 +78,7 @@ public class LinkedList {
 
     }
     public void remove(Node targetNode) throws Exception{
-        // traverse til nextNode equals targetNode
+        // traverse til nextNode.value equals targetNode.value
         // changes previous node pointer to nextNode pointer
         // so nextNode can never be reached
 
@@ -90,11 +92,17 @@ public class LinkedList {
         else{
             // if only the head in list, you cannot traverse
             currentNode = this.headNode;
+            // must check first if the head is the targetNode
+            if (currentNode.getValue() == targetNode.getValue()){
+                // list now empty
+                this.headNode = null;
+                return; // leave function
+            }
 
             nextNode = currentNode.getPointer();
             while (!(nextNode == null)){
                 // traverse until the end of the list
-                if (nextNode == targetNode) {
+                if (nextNode.getValue() == targetNode.getValue()) {
                     currentNode.setPointer(nextNode.getPointer());
                     return; // leave function
                 }
@@ -110,18 +118,53 @@ public class LinkedList {
         }
     }
 
-//    public int getLength() {
-//        // if empty, returns 0
-//        // else traverses through list until
-//        // the next element is null
-//        if (isEmpty()){
-//            return 0;
-//        }
-//        else{
-//            int acc = 1;
-//
-//        }
-//    }
+    public int getLength() {
+        // if empty, returns 0
+        // else traverses through list until
+        // the next element is null
+        if (isEmpty()){
+            return 0;
+        }
+        else{
+            int acc = 1;
+            currentNode = headNode;
+            nextNode = currentNode.getPointer();
+            while (!(nextNode == null)){
+                // traverse til end of the list
+                currentNode = nextNode;
+                nextNode = currentNode.getPointer();
+                acc++;
+            }
+            // return length
+            return acc;
+        }
+    }
+
+    public int getNth(int n) throws Exception{
+        // if its empty, throw exception
+        // if element outside range of list, throw an exception
+        // else traverse to the nth element (0-based indexing)
+
+        if (isEmpty()){
+            throw new Exception("This list is empty!");
+        }
+        if ((this.getLength() - 1) < n){
+            throw new Exception(("This is outside the valid range!"));
+        }
+
+        else{
+            currentNode = this.headNode;
+            nextNode = currentNode.getPointer();
+            for (int i = 0; i < n; i++){
+                currentNode = nextNode;
+                nextNode = currentNode.getPointer();
+            }
+            // returns the nth value
+            return currentNode.getValue();
+        }
+
+
+    }
 
 }
 
