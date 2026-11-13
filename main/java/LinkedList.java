@@ -9,7 +9,7 @@ public class LinkedList {
     private Node currentNode;
     private Node nextNode;
 
-    private boolean isEmpty(){
+    public boolean isEmpty(){
         // if headNode doesn't point to any node, the list must be empty
         return headNode == null;
     }
@@ -26,7 +26,7 @@ public class LinkedList {
 
     public void add(Node newNode){
         // adds a new node to the linked list
-        if (isEmpty()){
+        if (this.isEmpty()){
             // if an empty list, make the newNode the head
             this.headNode = newNode;
         }
@@ -48,7 +48,7 @@ public class LinkedList {
         // so last element can never be reached
 
         // if is empty throw an exception
-        if (isEmpty()){
+        if (this.isEmpty()){
             throw new Exception("List is empty!");
         }
 
@@ -57,7 +57,8 @@ public class LinkedList {
             currentNode = this.headNode;
             if (currentNode.getPointer() == null){
                 this.headNode = null;
-                return this.getHead();
+                // returns the previous head
+                return this.currentNode.getValue();
             }
             else{
                 nextNode = currentNode.getPointer();
