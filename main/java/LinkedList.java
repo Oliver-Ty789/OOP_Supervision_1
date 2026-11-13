@@ -42,7 +42,7 @@ public class LinkedList {
         }
     }
 
-    public void pop() throws Exception{
+    public int pop() throws Exception{
         // traverse til the end of list
         // changes previous node pointer to null
         // so last element can never be reached
@@ -67,6 +67,8 @@ public class LinkedList {
                 }
                 // now end of list is found, change current node to end
                 currentNode.setPointer(null);
+                // return the value of the last element
+                return nextNode.getValue();
             }
         }
 
