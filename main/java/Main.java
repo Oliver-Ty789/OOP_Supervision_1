@@ -1,7 +1,4 @@
 
-
-
-
 public static int[] vectorAdd(int x,int y,int dx, int dy) {
     x=x+dx;
     y=y+dy;
@@ -17,3 +14,4 @@ void main(String[] args) {
     b = coordinates[1];
     IO.println(a + "," + b);
 }
+
