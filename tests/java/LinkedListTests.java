@@ -114,6 +114,35 @@ public class LinkedListTests {
                 });
     }
 
+    @Test
+    void checkIfCyclesAreDetected () throws Exception {
+        var list = new LinkedList();
+        var node = new Node(10);
+        var node2 = new Node(15);
+        var node3 = new Node(12);
+        // creates cycle
+        node3.setPointer(node2);
+
+        list.add(node);
+        list.add(node2);
+        list.add(node3);
+
+        assertTrue(list.detectCycles());
+    }
+
+    @Test
+    void checkIfCyclesAreNotDetected () throws Exception {
+        var list = new LinkedList();
+        var node = new Node(10);
+        var node2 = new Node(15);
+        var node3 = new Node(12);
+
+        list.add(node);
+        list.add(node2);
+        list.add(node3);
+
+        assertFalse(list.detectCycles());
+    }
 
 
 

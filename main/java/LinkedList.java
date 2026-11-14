@@ -1,4 +1,5 @@
 package main.java;
+import java.util.HashSet;
 
 public class LinkedList {
 
@@ -162,6 +163,43 @@ public class LinkedList {
             // returns the nth value
             return currentNode.getValue();
         }
+
+
+    }
+
+    public boolean detectCycles() throws Exception{
+        // can't detect cycles on an empty list,
+        // so throw exception if it's empty
+        // using a Hashset, nodes will be added to the set
+        // if the Hashset doesn't change after adding a node
+        // there must be a cycle, so return true
+        // if tail is found, no cycles, therefore return false
+
+        if (isEmpty()){
+            throw new Exception("This list is Empty!");
+        }
+        else{
+            var nodeSet = new HashSet<Node>(){};
+
+            currentNode = headNode;
+            nextNode = currentNode.getPointer();
+
+            // loop through nodes until tail is found or cycle
+            while (!(nextNode == null)){
+                int previousSize = nodeSet.size();
+                nodeSet.add(currentNode);
+                // checks if any change to size is made to nodeSet
+                if (nodeSet.size() == previousSize){
+                    // cycle is found
+                    return true;
+                }
+                currentNode = nextNode;
+                nextNode = currentNode.getPointer();
+            }
+            // tail is found so return false
+            return false;
+        }
+
 
 
     }
